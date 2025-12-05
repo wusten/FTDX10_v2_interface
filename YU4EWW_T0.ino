@@ -300,7 +300,7 @@ void PlotPowerBar()
 		if ( powerChanged )
 		{
 //			Serial.println(power);
-      sFlag.s2 = 1;
+                        sFlag.s3 = 1;
 			powerChanged = false;
 		}
 		sFlag.clears= 1;
@@ -329,8 +329,8 @@ void PlotSwrBar()
 		ReadSwr();
 		if ( swrChanged )
 		{
-			sFlag.s3 = 1;
-			swrChanged = false;
+			sFlag.s2 = 1;
+				swrChanged = false;
 		}
 		sFlag.clears= 1;
 	}

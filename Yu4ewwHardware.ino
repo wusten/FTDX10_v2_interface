@@ -690,41 +690,44 @@ static void buttonPress(int button, int press_type)
 }
 // -------------------------------------------------
 
+static const int kEncoderCountsPerDetent = 4;
+
+static bool ApplyEncoderChange(QuadEncoder &encoder, int &value, int newValue, int minValue, int maxValue)
+{
+        if ( value == newValue )
+        {
+                return false;
+        }
+
+        value = newValue;
+
+        if ( value > maxValue )
+        {
+                encoder.write( kEncoderCountsPerDetent * maxValue );
+                value = maxValue;
+        }
+        else if ( value < minValue )
+        {
+                encoder.write( kEncoderCountsPerDetent * minValue );
+                value = minValue;
+        }
+
+        return true;
+}
+
 // ----CHECK ENCODERS-------------------------------
 static void CheckEncoders()
 {
-	newEnc0 = encT.read() / 4;
-	if ( enc0 != newEnc0 )
-	{
-		enc0 = newEnc0;
-		if ( enc0 > enc0Max )
-		{
-			encT.write( 4 * enc0Max );
-			enc0 = enc0Max;
-		}
-		if ( enc0 < enc0Min )
-		{
-			encT.write( 4 * enc0Min );
-			enc0 = enc0Min;
-		}
-		UpdateEnc0();
-	}
-	newEnc1 = encB.read() / 4;
-	if ( enc1 != newEnc1 )
-	{
-		enc1 = newEnc1;
-		if ( enc1 > enc1Max )
-		{
-			encB.write( 4 * enc1Max );
-			enc1 = enc1Max;
-		}
-		if ( enc1 < enc1Min )
-		{
-			encB.write( 4 * enc1Min );
-			enc1 = enc1Min;
-		}
-		UpdateEnc1();
-	}
+        newEnc0 = encT.read() / kEncoderCountsPerDetent;
+        if ( ApplyEncoderChange(encT, enc0, newEnc0, enc0Min, enc0Max) )
+        {
+                UpdateEnc0();
+        }
+        newEnc1 = encB.read() / kEncoderCountsPerDetent;
+        if ( ApplyEncoderChange(encB, enc1, newEnc1, enc1Min, enc1Max) )
+        {
+                UpdateEnc1();
+        }
 }
 // -------------------------------------------------
 
