@@ -29,14 +29,14 @@ static void WriteTxBuffer(int i)
 // Write to Amp port
 static void WriteTxBuffer5(int i)
 {
-        if ( dFlag.yaesuTx && Serial )
-        {
-                txBuf5[i] = '\0';
-                serPrint( "Amp: Tx buffer", txBuf5, "bytes", i );
-        }
-        Serial5.write(txBuf5, i);
-        elapsedMicros txAmp = 0;
-        while ( txAmp < 100 ){}
+	if ( dFlag.yaesuTx && Serial )
+	{
+		txBuf4[i] = '\0';
+		serPrint( "Radio: Tx buffer", txBuf4, "bytes", i ); 
+	}
+	Serial5.write(txBuf4, i);
+	elapsedMicros txRadio1 = 0;
+//	while ( txRadio1 < 100 ){}
 }
 //----------------------
 
@@ -112,7 +112,7 @@ static void UpdateRadio1()
 //----------------------
 
 // Check Radio for Change
-static void __attribute__((unused)) CheckRadio()
+static void CheckRadio()
 {
 	ReadBand();
 	if ( bandChanged )
@@ -737,12 +737,12 @@ void CheckAmp()
     rcvidx5 = 0;
   }  
 	Process_serial4();
-        if ( newData4 )
+  if ( newData4 )
   {
     for ( byte i=0; i <= rcvidx4; i++ )
     {
-      txBuf5[i] = rcvdChar4[i];
-    }
+      txBuf4[i] = rcvdChar4[i];
+    }			
     WriteTxBuffer5(rcvidx4+1);
     newData4 = false;
     rcvidx4 = 0;
