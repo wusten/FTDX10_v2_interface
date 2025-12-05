@@ -252,7 +252,7 @@ void UpdateDisplay()
 			tft.print ( "TX" );
 			sFlag.s1txd = 0;
 		}
-		if ( sFlag.s2 )	// SWR fill box, add text
+		if ( sFlag.s2 )	// fill box, add text
 		{
 			if ( swr < oldSwr )
 			{
@@ -294,7 +294,7 @@ void UpdateDisplay()
 			oldSwr = swr;
 			sFlag.s2 = 0;
 		}
-		if ( sFlag.s3 )	// POWER fill box, add text
+		if ( sFlag.s3 )	// SWR fill box, add text
 		{
 			if ( power < oldPower )
 			{
@@ -302,17 +302,17 @@ void UpdateDisplay()
 			}
 			else
 			{
-                                if ( power > 0  )
-                                {
-                                        if ( power > ypwr0 )
-                                        {
-                                                tft.fillRect( xpStart+1 , ypBar, ypwr0, ypBarL, boxPwrColor[0]);
-                                        }
-                                        else
-                                        {
-                                                tft.fillRect( xpStart+1 , ypBar, power, ypBarL, boxPwrColor[0]);
-                                        }
-                                }
+				if ( power > 0  )
+				{
+					if ( power > ypwr0 )
+					{
+						tft.fillRect( xpStart+1 , ypBar, ypwr0, ypBarL, boxPwrColor[0]);
+					}
+					else
+					{
+						tft.fillRect( xpStart+1 , ypBar, swr, ypBarL, boxPwrColor[0]);
+					}
+				}
 				if ( power > ypwr0 )
 				{
 					if ( power > ypwr1 )

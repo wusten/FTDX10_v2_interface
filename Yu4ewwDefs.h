@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 #include <Wire.h>
+#include <Wire.h>
 #include "QuadEncoder.h"
 
 #include "SPI.h"
@@ -33,9 +34,9 @@ static bool newData = false;
 static const int Serial4Timeout = 20;
 static bool newData4 = false;
 static char txBuf4[32];
-static char txBuf5[32];
 static char Fa[9];
 static bool newData5 = false;
+static char txBuf5[32];
 
 //----IO PINS---------------------------------------------
 static const int pttIn	 = 19;

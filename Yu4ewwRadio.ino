@@ -115,7 +115,7 @@ static int ReadScopeSpan()
 	return scopeSpan;
 }
 //----Read APF----------
-static int __attribute__((unused)) ReadApf()
+static int ReadApf()
 {
 	txBuf4[0]= 'C';
 	txBuf4[1]= 'O';
@@ -160,7 +160,7 @@ static int ReadRFilter()
 	return rFilter;
 }
 //----Read Width------------
-static int __attribute__((unused)) ReadWidth()
+static int ReadWidth()
 {
 	txBuf4[0]= 'S';
 	txBuf4[1]= 'H';
